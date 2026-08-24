@@ -37,9 +37,8 @@ through Python.
 ## The four hops
 
 ### Hop 1 — Ingest and OCR (`rag/ingest.py`)
-
 Three BigQuery objects are created, then one statement does the work.
-
+![alt text](doc_image/how_ocr.png)
 An **object table** (`documents_table`) points at `gs://rawdata_minio/pdf/*`. It holds one
 row per file — uri, size, content type, and a `ref` to the bytes — turning a bucket into
 something queryable. A **remote model** (`docai_model`) points at a Document AI OCR
