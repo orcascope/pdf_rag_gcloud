@@ -151,13 +151,8 @@ publisher models are not served.
 - **Retrieval is O(corpus) per query.** Every search pulls all embeddings to the client.
   The next change is a BigQuery vector index with `VECTOR_SEARCH`, moving the scan
   server-side and making it approximate.
-- **Re-running embedding duplicates rows.** `document_embeddings` has no uniqueness
-  constraint; a per-source delete before insert, or a load job with `WRITE_TRUNCATE`,
-  would make it idempotent.
 - **Retrieved text is interpolated into the prompt undelimited**, so a document containing
   instructions can influence the model. Retrieved content needs to be fenced and framed as
   untrusted data.
 - **No relevance threshold.** The top-k chunks are used even when every score is low, so an
   off-topic question still gets confident-sounding context.
-- **No tests or evals**, no structured logging, and infrastructure (connection, processor,
-  dataset, IAM) was created by hand rather than declared in Terraform.
